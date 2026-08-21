@@ -119,6 +119,58 @@ export const experience = [
 
 export const systemsPrinciples = ['Performance', 'Security', 'Scalability', 'Reliability', 'Real Impact'];
 
+export const skillCategories = [
+  {
+    id: 'Programming',
+    name: 'Programming',
+    icon: '💻',
+    description: 'Languages used for core software engineering, data structures, algorithm design, and system development.',
+    skills: ['Python', 'Java', 'C'],
+  },
+  {
+    id: 'Frontend',
+    name: 'Frontend',
+    icon: '🎨',
+    description: 'Modern frameworks and languages for building responsive, pixel-perfect, and interactive web user interfaces.',
+    skills: ['HTML', 'CSS', 'JavaScript', 'React.js', 'Next.js'],
+  },
+  {
+    id: 'Backend',
+    name: 'Backend',
+    icon: '⚙️',
+    description: 'Technologies for engineering robust RESTful APIs, high-performance web servers, and business logic.',
+    skills: ['Node.js', 'FastAPI', 'REST APIs'],
+  },
+  {
+    id: 'Databases',
+    name: 'Databases',
+    icon: '🗄️',
+    description: 'Relational and NoSQL database management systems for reliable data storage and indexing.',
+    skills: ['MongoDB', 'MySQL'],
+  },
+  {
+    id: 'Cloud & DevOps',
+    name: 'Cloud & DevOps',
+    icon: '☁️',
+    description: 'Cloud providers, containerization platforms, IaC tools, and automated deployment pipelines.',
+    skills: ['AWS', 'GCP', 'Docker', 'Google Kubernetes Engine', 'Terraform', 'GitHub Actions'],
+  },
+  {
+    id: 'Developer Tools',
+    name: 'Developer Tools',
+    icon: '🛠️',
+    description: 'CLI tools, version control, API testing tools, and AI-assisted development environments.',
+    skills: ['Git', 'GitHub', 'Postman', 'GitHub CLI', 'GitHub Copilot', 'Cursor', 'Antigravity'],
+  },
+  {
+    id: 'Analytics',
+    name: 'Analytics',
+    icon: '📊',
+    description: 'Business intelligence and data visualization platforms for analytics and decision metrics.',
+    skills: ['Tableau', 'Power BI'],
+  },
+];
+
 export const skills = {
   Programming: ['Python', 'Java', 'C'],
   Frontend: ['HTML', 'CSS', 'JavaScript', 'React.js', 'Next.js'],
