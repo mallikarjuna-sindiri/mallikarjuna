@@ -1,3 +1,13 @@
+import viteHome from './images/projects/1vite/1vite_home.png';
+import viteHld from './images/projects/1vite/1vite_hld.png';
+import viteLld from './images/projects/1vite/1vite_lld.png';
+import viteWorkflow from './images/projects/1vite/1vite_workflow.png';
+
+import acadHome from './images/projects/1vite/acadlink/acadlink_home.png';
+import acadHld from './images/projects/1vite/acadlink/acadlink_hld.png';
+import acadLld from './images/projects/1vite/acadlink/acadlink_lld.png';
+import acadWorkflow from './images/projects/1vite/acadlink/acadlink_workflow.png';
+
 export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Projects', href: '/projects' },
@@ -59,13 +69,43 @@ export const projects = [
   {
     slug: '1vite',
     name: '1Vite',
-    subtitle: 'AI-powered event invitation platform.',
+    subtitle: 'AI-powered event invitation & photo sharing platform.',
     problem: 'Teams needed a smarter way to build, personalize and distribute invitations at scale.',
     solution: 'Built a full-stack platform with image-processing features, optimized APIs and cloud deployment support.',
     feature: 'AI-assisted invitation workflows with scalable backend handling.',
     stack: ['Next.js', 'FastAPI', 'Python', 'Docker', 'AWS', 'GCP'],
     github: 'https://github.com/mallikarjuna-sindiri',
+    liveUrl: 'https://1vite.ai/',
     demoLabel: 'Open Case Study',
+    homeImage: viteHome,
+    hldImage: viteHld,
+    lldImage: viteLld,
+    workflowImage: viteWorkflow,
+    hldTitle: 'Microservices & Cloud Media Architecture (1Vite HLD)',
+    hldDescription: '1Vite High-Level Architecture featuring Next.js frontend client, FastAPI backend application layer, PostgreSQL / MongoDB data persistence, and AWS S3 / GCP image processing pipeline.',
+    hldHighlights: [
+      'Frontend SPA built with Next.js & React for high-performance client rendering',
+      'Asynchronous FastAPI REST services handling image ingestion & AI generation',
+      'Distributed cloud storage for high-resolution invitations & media assets via AWS S3 / GCP',
+      'Dockerized deployment pipelines across multi-cloud infrastructure',
+    ],
+    lldTitle: 'Component Specs & API Module Design (1Vite LLD)',
+    lldDescription: 'Low-Level Class and Module Diagram detailing API routes, Authentication handler, Image Processor, Template Engine, and Data Access Objects.',
+    lldHighlights: [
+      'Modular FastAPI router structure segregating Auth, Event, and Media endpoints',
+      'Pydantic schemas enforcing strict request/response data validation',
+      'Asynchronous task workers for compute-intensive image manipulation',
+      'Database ORM abstraction for clean data access layers',
+    ],
+    workflowTitle: 'User Interaction & Processing Workflow Diagram (1Vite)',
+    workflowDescription: 'End-to-end workflow sequence illustrating user onboarding, invitation customization, asynchronous AI processing, CloudFront CDN caching, and distribution.',
+    workflowSteps: [
+      { step: '01', title: 'Event Creation & Theme Selection', desc: 'User picks event theme, inputs metadata, and customizes AI parameters.' },
+      { step: '02', title: 'Async API Request & Validation', desc: 'FastAPI validates inputs via Pydantic schemas and enqueues tasks.' },
+      { step: '03', title: 'AI Processing & Media Generation', desc: 'Image manipulation engine generates personalized cards and renders outputs.' },
+      { step: '04', title: 'Cloud Asset Storage & Signed URLs', desc: 'Assets are uploaded to cloud storage and signed distribution URLs are generated.' },
+      { step: '05', title: 'Multi-Channel Distribution', desc: 'Invitations are dispatched via email, QR codes, and custom domain links.' },
+    ],
   },
   {
     slug: 'acadlink',
@@ -76,7 +116,37 @@ export const projects = [
     feature: 'QR/code-based subject enrollment and learning management flows.',
     stack: ['React.js', 'FastAPI', 'MongoDB', 'Tailwind CSS'],
     github: 'https://github.com/mallikarjuna-sindiri',
+    liveUrl: 'https://github.com/mallikarjuna-sindiri',
     demoLabel: 'Open Case Study',
+    homeImage: acadHome,
+    hldImage: acadHld,
+    lldImage: acadLld,
+    workflowImage: acadWorkflow,
+    hldTitle: 'Role-Based LMS System Architecture (AcadLink HLD)',
+    hldDescription: 'AcadLink High-Level Architecture featuring React.js frontend client, FastAPI application layer, MongoDB data persistence, and role-based access control (Admin, Faculty, Student).',
+    hldHighlights: [
+      'Modular React SPA for role-specific interfaces (Admin Dashboard, Faculty Console, Student Portal)',
+      'FastAPI REST server with Pydantic validation and JWT token authentication',
+      'MongoDB NoSQL database for flexible academic document storage and assignment submissions',
+      'QR-code generation & verification service for automated attendance and enrollment',
+    ],
+    lldTitle: 'API Controllers & Component Specs (AcadLink LLD)',
+    lldDescription: 'Low-Level Class and Module Diagram detailing User Auth Middleware, Course Router, Assignment Manager, Grading Engine, and QR Code Generator.',
+    lldHighlights: [
+      'RBAC security middleware protecting Admin, Faculty, and Student endpoints',
+      'Course Router managing enrollment codes, subject materials, and announcements',
+      'Assignment Submission pipeline handling file uploads and automated deadline checks',
+      'MongoDB indexing on student IDs, course tokens, and submission timestamps',
+    ],
+    workflowTitle: 'User Interaction & Academic Operations Workflow (AcadLink)',
+    workflowDescription: 'Complete workflow sequence from course setup & QR token generation to student enrollment, assignment delivery, submission, and grading.',
+    workflowSteps: [
+      { step: '01', title: 'Course Creation & QR Generation', desc: 'Faculty creates a subject module and system generates a unique QR code / join token.' },
+      { step: '02', title: 'Frictionless QR Student Enrollment', desc: 'Students scan the QR code via mobile/web interface to immediately enroll in the course.' },
+      { step: '03', title: 'Assignment & Content Release', desc: 'Faculty publishes lecture notes, announcements, and assignment tasks.' },
+      { step: '04', title: 'Submission & Automated Processing', desc: 'Students submit work before deadline via secure file upload pipeline.' },
+      { step: '05', title: 'Grading & Real-Time Performance Analytics', desc: 'Faculty reviews submissions, assigns grades, and student dashboards update instantly.' },
+    ],
   },
   {
     slug: 'dash',
@@ -87,7 +157,31 @@ export const projects = [
     feature: 'Priority-aware task management with clear UX.',
     stack: ['MERN Stack'],
     github: 'https://github.com/mallikarjuna-sindiri',
+    liveUrl: 'https://github.com/mallikarjuna-sindiri',
     demoLabel: 'Open Case Study',
+    homeImage: null,
+    hldImage: null,
+    lldImage: null,
+    hldTitle: 'DASH System Architecture',
+    hldDescription: 'Full-stack MERN scheduling architecture with Express.js API backend, MongoDB persistence, and React frontend.',
+    hldHighlights: [
+      'Real-time conflict detection engine',
+      'Scheduled background notifications for task deadlines',
+      'Interactive React calendar and timeline view',
+    ],
+    lldTitle: 'DASH Component & Algorithm Specs',
+    lldDescription: 'Priority algorithm modules, calendar grid view components, and task state management.',
+    lldHighlights: [
+      'Interval scheduling algorithm for collision-free task placement',
+      'Optimistic state updates for instant UX feedback',
+      'MongoDB indexing on user ID and timestamp ranges',
+    ],
+    workflowSteps: [
+      { step: '01', title: 'Task Input', desc: 'User enters task details, priority, and deadline.' },
+      { step: '02', title: 'Conflict Detection', desc: 'System checks existing calendar slots for overlapping commitments.' },
+      { step: '03', title: 'Smart Slot Suggestion', desc: 'Assistant recommends optimal execution slots.' },
+      { step: '04', title: 'Tracking & Reminders', desc: 'Task progress is tracked and automated alerts trigger before deadlines.' },
+    ],
   },
   {
     slug: 'sendy',
@@ -98,7 +192,31 @@ export const projects = [
     feature: 'No-login sharing with controlled access and simple distribution.',
     stack: ['React.js', 'FastAPI', 'MongoDB', 'Tailwind CSS'],
     github: 'https://github.com/mallikarjuna-sindiri',
+    liveUrl: 'https://github.com/mallikarjuna-sindiri',
     demoLabel: 'Open Case Study',
+    homeImage: null,
+    hldImage: null,
+    lldImage: null,
+    hldTitle: 'Sendy Sharing System Architecture',
+    hldDescription: 'Frictionless file sharing platform with ephemeral blob storage, encrypted payloads, and QR distribution.',
+    hldHighlights: [
+      'Domain-isolated file sharing channels',
+      'Optional bcrypt password protection for sensitive shares',
+      'Automatic cleanup workers for expired payloads',
+    ],
+    lldTitle: 'Sendy Component & Crypto Specs',
+    lldDescription: 'File chunking modules, temporary URL routing, and security middleware.',
+    lldHighlights: [
+      'Streaming payload upload handler for large media files',
+      'Short URL hash generator for clean links',
+      'Rate-limiting middleware protecting against brute-force access',
+    ],
+    workflowSteps: [
+      { step: '01', title: 'Drop & Upload', desc: 'User drops text or files without logging in.' },
+      { step: '02', title: 'Security Configuration', desc: 'Optional password and expiration timer are attached.' },
+      { step: '03', title: 'Link & QR Generation', desc: 'Unique URL and downloadable QR code are produced instantly.' },
+      { step: '04', title: 'Secure Access & Auto Cleanup', desc: 'Recipient opens link and payload auto-deletes upon expiry.' },
+    ],
   },
 ];
 
