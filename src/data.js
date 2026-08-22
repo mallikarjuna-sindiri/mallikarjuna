@@ -3,10 +3,33 @@ import viteHld from './images/projects/1vite/1vite_hld.png';
 import viteLld from './images/projects/1vite/1vite_lld.png';
 import viteWorkflow from './images/projects/1vite/1vite_workflow.png';
 
-import acadHome from './images/projects/1vite/acadlink/acadlink_home.png';
-import acadHld from './images/projects/1vite/acadlink/acadlink_hld.png';
-import acadLld from './images/projects/1vite/acadlink/acadlink_lld.png';
-import acadWorkflow from './images/projects/1vite/acadlink/acadlink_workflow.png';
+import acadHome from './images/projects/acadlink/acadlink_home.png';
+import acadHld from './images/projects/acadlink/acadlink_hld.png';
+import acadLld from './images/projects/acadlink/acadlink_lld.png';
+import acadWorkflow from './images/projects/acadlink/acadlink_workflow.png';
+
+import dashHome from './images/projects/dash/dash_home.png';
+import dashHld from './images/projects/dash/dash_hld.png';
+import dashLld from './images/projects/dash/dash_lld.png';
+import dashWorkflow from './images/projects/dash/dash_workflow.png';
+
+import nexoraHome from './images/projects/nexora/nexora_home.png';
+import nexoraHld from './images/projects/nexora/nexora_hld.png';
+import nexoraLld from './images/projects/nexora/nexora_lld.png';
+import nexoraWorkflow from './images/projects/nexora/nexora_workflow.png';
+
+import pchatHome from './images/projects/pchat/pchat_home.png';
+import pchatHld from './images/projects/pchat/pchat_hld.png';
+import pchatLld from './images/projects/pchat/pchat_lld.png';
+import pchatWorkflow from './images/projects/pchat/pchat_workflow.png';
+
+import sendyHld from './images/projects/sendy/sendy_hld.png';
+import sendyLld from './images/projects/sendy/sendly_lld.png';
+
+import trashioHome from './images/projects/trashio/trashio_home.png';
+import trashioHld from './images/projects/trashio/trashio_hld.png';
+import trashioLld from './images/projects/trashio/trashio_lld.png';
+import trashioWorkflow from './images/projects/trashio/trashio_workflow.png';
 
 export const navLinks = [
   { label: 'Home', href: '/' },
@@ -18,7 +41,7 @@ export const navLinks = [
 ];
 
 export const stats = [
-  { value: '4+', label: 'Projects' },
+  { value: '7+', label: 'Projects' },
   { value: '9.55', label: 'CGPA' },
   { value: "CSE'27", label: 'CSE' },
 ];
@@ -73,7 +96,7 @@ export const projects = [
     problem: 'Teams needed a smarter way to build, personalize and distribute invitations at scale.',
     solution: 'Built a full-stack platform with image-processing features, optimized APIs and cloud deployment support.',
     feature: 'AI-assisted invitation workflows with scalable backend handling.',
-    stack: ['Next.js', 'FastAPI', 'Python', 'Docker', 'AWS', 'GCP','postgreSQL','CosmosDB','Redis'],
+    stack: ['Next.js', 'FastAPI', 'Python', 'Docker', 'AWS', 'GCP', 'PostgreSQL', 'CosmosDB', 'Redis'],
     github: null,
     liveUrl: 'https://1vite.ai/',
     demoLabel: 'Open Case Study',
@@ -151,36 +174,121 @@ export const projects = [
   {
     slug: 'dash',
     name: 'DASH',
-    subtitle: 'Smart scheduling assistant.',
-    problem: 'Users need a lightweight way to prioritize work, detect conflicts and stay on track.',
-    solution: 'Designed an interactive planning tool with reminders, progress tracking and conflict detection.',
-    feature: 'Priority-aware task management with clear UX.',
-    stack: ['MERN Stack'],
+    subtitle: 'Smart scheduling & task management assistant.',
+    problem: 'Users need a lightweight way to prioritize work, detect conflicts and stay on track with automated reminders.',
+    solution: 'Designed an interactive planning tool with real-time conflict detection, progress tracking and automated notifications.',
+    feature: 'Priority-aware task management with interval scheduling algorithms.',
+    stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS'],
     github: 'https://github.com/mallikarjuna-sindiri',
     liveUrl: null,
     demoLabel: 'Open Case Study',
-    homeImage: null,
-    hldImage: null,
-    lldImage: null,
-    hldTitle: 'DASH System Architecture',
-    hldDescription: 'Full-stack MERN scheduling architecture with Express.js API backend, MongoDB persistence, and React frontend.',
+    homeImage: dashHome,
+    hldImage: dashHld,
+    lldImage: dashLld,
+    workflowImage: dashWorkflow,
+    hldTitle: 'DASH Scheduling System Architecture (HLD)',
+    hldDescription: 'High-Level Architecture for DASH scheduling platform featuring React frontend client, Express.js REST API layer, MongoDB storage, and background notification service.',
     hldHighlights: [
-      'Real-time conflict detection engine',
-      'Scheduled background notifications for task deadlines',
-      'Interactive React calendar and timeline view',
+      'React SPA client for calendar management & conflict visualization',
+      'Express REST API services managing task CRUD and priority algorithms',
+      'MongoDB NoSQL database for flexible event schemas and indexing',
+      'Background notification queues for upcoming deadline alerts',
     ],
-    lldTitle: 'DASH Component & Algorithm Specs',
-    lldDescription: 'Priority algorithm modules, calendar grid view components, and task state management.',
+    lldTitle: 'Interval Scheduling & Conflict Detection Specs (LLD)',
+    lldDescription: 'Low-Level Class and Module Diagram detailing Task Router, Conflict Detection Engine, Priority Scheduler, and User Notification Controller.',
     lldHighlights: [
-      'Interval scheduling algorithm for collision-free task placement',
-      'Optimistic state updates for instant UX feedback',
-      'MongoDB indexing on user ID and timestamp ranges',
+      'Interval scheduling algorithm preventing overlapping time commitments',
+      'Optimistic UI updates for immediate user interaction feedback',
+      'JWT middleware for secure user authentication',
+      'Indexed MongoDB queries by userId and timestamp ranges',
     ],
+    workflowTitle: 'Task Scheduling & Conflict Resolution Workflow',
+    workflowDescription: 'Step-by-step sequence from task input and timeline conflict evaluation to smart slot recommendations and scheduled alerts.',
     workflowSteps: [
-      { step: '01', title: 'Task Input', desc: 'User enters task details, priority, and deadline.' },
-      { step: '02', title: 'Conflict Detection', desc: 'System checks existing calendar slots for overlapping commitments.' },
-      { step: '03', title: 'Smart Slot Suggestion', desc: 'Assistant recommends optimal execution slots.' },
-      { step: '04', title: 'Tracking & Reminders', desc: 'Task progress is tracked and automated alerts trigger before deadlines.' },
+      { step: '01', title: 'Task Input & Metadata', desc: 'User inputs task name, duration, priority tier, and target deadline.' },
+      { step: '02', title: 'Conflict Evaluation', desc: 'System queries existing schedule slots to identify temporal collisions.' },
+      { step: '03', title: 'Smart Slot Suggestion', desc: 'Interval algorithm calculates and suggests optimal execution windows.' },
+      { step: '04', title: 'Task Dispatch & Reminders', desc: 'Task is committed to database and automated reminder triggers are scheduled.' },
+    ],
+  },
+  {
+    slug: 'nexora',
+    name: 'Nexora',
+    subtitle: 'AI-driven workflow & process automation engine.',
+    problem: 'Teams struggle to connect disparate cloud services, automate multi-step developer workflows, and process events with low latency.',
+    solution: 'Architected a modular workflow engine enabling asynchronous event handling, AI pipeline execution, and multi-service integrations.',
+    feature: 'Visual workflow orchestration with asynchronous trigger execution and AI-assisted automation.',
+    stack: ['React.js', 'FastAPI', 'Python', 'Docker', 'PostgreSQL', 'Redis', 'AWS'],
+    github: 'https://github.com/mallikarjuna-sindiri',
+    liveUrl: null,
+    demoLabel: 'Open Case Study',
+    homeImage: nexoraHome,
+    hldImage: nexoraHld,
+    lldImage: nexoraLld,
+    workflowImage: nexoraWorkflow,
+    hldTitle: 'Distributed Workflow Engine Architecture (Nexora HLD)',
+    hldDescription: 'Nexora High-Level Architecture featuring React.js builder portal, FastAPI trigger service, Redis task queue, worker nodes, and PostgreSQL persistence.',
+    hldHighlights: [
+      'React workflow builder for visual step orchestration & dynamic node wiring',
+      'Asynchronous FastAPI ingestion engine receiving external webhooks & API triggers',
+      'Redis-backed message queue distributing compute-heavy automation jobs',
+      'Distributed worker nodes executing AI processing pipelines and multi-cloud tasks',
+    ],
+    lldTitle: 'Task Executor & Pipeline Module Design (Nexora LLD)',
+    lldDescription: 'Low-Level Class and Module Diagram detailing Workflow Engine, Task Scheduler, Event Router, Integration Gateway, and State Store.',
+    lldHighlights: [
+      'Event-driven router triggering pipelines on HTTP, Webhook, or scheduled signals',
+      'State machine managing step retries, error fallbacks, and execution timeouts',
+      'Pluggable integration gateway abstracting third-party API payloads',
+      'PostgreSQL ORM schemas storing pipeline definitions and execution logs',
+    ],
+    workflowTitle: 'Automated Pipeline Execution & Event Workflow',
+    workflowDescription: 'End-to-end execution flow from trigger event ingestion and queue scheduling to worker execution, AI transformation, and response dispatch.',
+    workflowSteps: [
+      { step: '01', title: 'Trigger Event Ingestion', desc: 'System receives API request, webhook, or scheduled cron trigger.' },
+      { step: '02', title: 'Task Enqueueing & Validation', desc: 'FastAPI validates payload and enqueues execution job in Redis queue.' },
+      { step: '03', title: 'Async Worker Execution', desc: 'Worker node executes workflow steps, calling AI models and integrations.' },
+      { step: '04', title: 'State Logging & Notification', desc: 'Execution result is persisted in PostgreSQL and status update is dispatched.' },
+    ],
+  },
+  {
+    slug: 'pchat',
+    name: 'PChat',
+    subtitle: 'Real-time messaging & chat platform.',
+    problem: 'Teams and individuals need fast, private, low-latency messaging with active presence detection.',
+    solution: 'Engineered a real-time chat application with WebSocket synchronization, room management, and persistent message history.',
+    feature: 'Real-time bi-directional messaging with instant room joining and online status.',
+    stack: ['React.js', 'Node.js', 'Socket.io', 'FastAPI', 'MongoDB', 'Tailwind CSS'],
+    github: 'https://github.com/mallikarjuna-sindiri',
+    liveUrl: null,
+    demoLabel: 'Open Case Study',
+    homeImage: pchatHome,
+    hldImage: pchatHld,
+    lldImage: pchatLld,
+    workflowImage: pchatWorkflow,
+    hldTitle: 'Real-Time Socket Architecture (PChat HLD)',
+    hldDescription: 'PChat High-Level System Architecture featuring React client interface, Node.js Socket.io server layer, FastAPI management endpoints, and MongoDB chat persistence.',
+    hldHighlights: [
+      'Bi-directional WebSocket infrastructure for zero-latency messaging',
+      'Distributed room management & user presence handlers',
+      'FastAPI service handling RESTful auth and user profile queries',
+      'MongoDB database indexing for rapid message history retrieval',
+    ],
+    lldTitle: 'Socket Handlers & Message Pipeline Specs (PChat LLD)',
+    lldDescription: 'Low-Level Design detailing Socket Gateway, Connection Pool Manager, Encryption / Sanitization Module, and Message Store DAO.',
+    lldHighlights: [
+      'WebSocket Gateway managing heartbeat connections and room subscriptions',
+      'Event-driven handlers for message payload transmission',
+      'Payload validation and sanitization preventing injection attacks',
+      'Asynchronous DB write buffers for optimized throughput',
+    ],
+    workflowTitle: 'Chat Connection & Message Delivery Workflow',
+    workflowDescription: 'End-to-end messaging sequence from WebSocket handshake and channel subscription to real-time broadcasting and storage.',
+    workflowSteps: [
+      { step: '01', title: 'WebSocket Handshake', desc: 'Client initiates socket connection and authenticates token.' },
+      { step: '02', title: 'Channel Subscription', desc: 'User joins specific chat room and triggers online status broadcast.' },
+      { step: '03', title: 'Message Broadcast', desc: 'Sender posts message; socket gateway broadcasts payload to connected peers instantly.' },
+      { step: '04', title: 'Asynchronous Persistence', desc: 'Message payload is stored asynchronously in MongoDB for history retrieval.' },
     ],
   },
   {
@@ -195,27 +303,70 @@ export const projects = [
     liveUrl: null,
     demoLabel: 'Open Case Study',
     homeImage: null,
-    hldImage: null,
-    lldImage: null,
-    hldTitle: 'Sendy Sharing System Architecture',
-    hldDescription: 'Frictionless file sharing platform with ephemeral blob storage, encrypted payloads, and QR distribution.',
+    hldImage: sendyHld,
+    lldImage: sendyLld,
+    workflowImage: null,
+    hldTitle: 'Sendy Ephemeral Storage & Distribution Architecture (HLD)',
+    hldDescription: 'Frictionless sharing system architecture with ephemeral payload handling, password hashing, and short link routing.',
     hldHighlights: [
       'Domain-isolated file sharing channels',
       'Optional bcrypt password protection for sensitive shares',
       'Automatic cleanup workers for expired payloads',
     ],
-    lldTitle: 'Sendy Component & Crypto Specs',
-    lldDescription: 'File chunking modules, temporary URL routing, and security middleware.',
+    lldTitle: 'Sendy Payload Handler & Crypto Specs (LLD)',
+    lldDescription: 'Low-Level Specifications detailing File Chunking Engine, Short Hash Generator, and Expiration Timer.',
     lldHighlights: [
       'Streaming payload upload handler for large media files',
       'Short URL hash generator for clean links',
       'Rate-limiting middleware protecting against brute-force access',
     ],
+    workflowTitle: 'Frictionless Upload & Expiry Workflow',
+    workflowDescription: 'Step-by-step flow from payload upload and link creation to secure retrieval and automated cleanup.',
     workflowSteps: [
       { step: '01', title: 'Drop & Upload', desc: 'User drops text or files without logging in.' },
       { step: '02', title: 'Security Configuration', desc: 'Optional password and expiration timer are attached.' },
       { step: '03', title: 'Link & QR Generation', desc: 'Unique URL and downloadable QR code are produced instantly.' },
       { step: '04', title: 'Secure Access & Auto Cleanup', desc: 'Recipient opens link and payload auto-deletes upon expiry.' },
+    ],
+  },
+  {
+    slug: 'trashio',
+    name: 'Trashio',
+    subtitle: 'Smart waste management & community reporting platform.',
+    problem: 'Municipalities and communities lack real-time visibility into bin overflow levels, pickup scheduling, and public reports.',
+    solution: 'Built a web application for smart waste tracking, route optimization, and community overflow reporting.',
+    feature: 'Real-time bin fill monitoring, geo-tagged incident reporting, and automated route planning.',
+    stack: ['React.js', 'FastAPI', 'Python', 'PostgreSQL', 'Docker', 'GCP'],
+    github: 'https://github.com/mallikarjuna-sindiri',
+    liveUrl: null,
+    demoLabel: 'Open Case Study',
+    homeImage: trashioHome,
+    hldImage: trashioHld,
+    lldImage: trashioLld,
+    workflowImage: trashioWorkflow,
+    hldTitle: 'Smart Waste System Architecture (Trashio HLD)',
+    hldDescription: 'Trashio High-Level System Architecture featuring React management portal, FastAPI REST backend, PostgreSQL geospatial storage, and route planning pipeline.',
+    hldHighlights: [
+      'React dashboard for real-time bin status visualization and community reports',
+      'FastAPI REST backend managing sensor telemetry and user submissions',
+      'PostgreSQL / PostGIS database for spatial querying and location data',
+      'Dockerized microservice deployment with cloud hosting support',
+    ],
+    lldTitle: 'Geospatial Route Engine & Reporting Specs (Trashio LLD)',
+    lldDescription: 'Low-Level Component Specifications detailing Telemetry Processor, Geospatial Query Router, Incident Manager, and Route Optimizer.',
+    lldHighlights: [
+      'Geospatial indexing optimizing proximity queries for waste collection trucks',
+      'Telemetry data ingestion service processing bin sensor fill levels',
+      'Role-based access control for Citizens, Workers, and Municipal Admins',
+      'Automated alert trigger when bin capacities cross threshold levels',
+    ],
+    workflowTitle: 'Incident Reporting & Waste Pickup Workflow',
+    workflowDescription: 'Sequence from citizen overflow report or sensor alert to collection truck routing and status resolution.',
+    workflowSteps: [
+      { step: '01', title: 'Telemetry & Report Ingestion', desc: 'Sensors report fill status or citizens submit geo-tagged overflow photos.' },
+      { step: '02', title: 'Geospatial Processing', desc: 'FastAPI backend processes location data and updates PostGIS spatial index.' },
+      { step: '03', title: 'Optimal Route Generation', desc: 'Route planning service calculates efficient collection path for drivers.' },
+      { step: '04', title: 'Pickup & Status Update', desc: 'Collection team completes pickup and clears alert status in real-time.' },
     ],
   },
 ];
