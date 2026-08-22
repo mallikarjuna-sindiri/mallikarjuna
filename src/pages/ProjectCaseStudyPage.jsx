@@ -42,10 +42,10 @@ export default function ProjectCaseStudyPage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <button
             type="button"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/projects')}
             className="inline-flex items-center gap-2 text-sm font-bold text-[var(--orange)] hover:text-[var(--orange-deep)]"
           >
-            <span>← Back to Portfolio</span>
+            <span>← Back to Projects</span>
           </button>
           <div className="flex items-center gap-3 text-xs font-semibold text-[rgba(45,45,45,0.7)] sm:text-sm">
             <span>Project: <strong className="text-[var(--ink)]">{project.name}</strong></span>
