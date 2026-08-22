@@ -501,3 +501,24 @@ export const contactDetails = [
   { label: 'LinkedIn', value: 'mallikarjuna-sindiri', href: 'https://www.linkedin.com/in/mallikarjuna-sindiri/' },
   { label: 'GitHub', value: 'mallikarjuna-sindiri', href: 'https://github.com/mallikarjuna-sindiri' },
 ];
+
+export const education = [
+  {
+    institution: 'VNR Vignana Jyothi Institute of Engineering and Technology',
+    degree: 'Bachelor of Technology in Computer Science and Engineering',
+    duration: '2023 – 2027',
+    grade: 'CGPA: 9.55',
+  },
+  {
+    institution: 'Narayana Junior College',
+    degree: 'Intermediate',
+    duration: '2021 – 2023',
+    grade: 'Percentage: 96.50',
+  },
+  {
+    institution: 'Sri Chaitanya School',
+    degree: 'SSC',
+    duration: '2021',
+    grade: 'Percentage: 99.33',
+  },
+];
