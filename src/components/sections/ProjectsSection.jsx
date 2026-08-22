@@ -109,24 +109,23 @@ export default function ProjectsSection() {
                     </Link>
                   </div>
 
-                  <p className="mt-4 text-sm leading-7 text-[rgba(45,45,45,0.82)]">
-                    <span className="font-bold text-[var(--ink)]">Problem:</span> {project.problem}
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-[rgba(45,45,45,0.82)]">
-                    <span className="font-bold text-[var(--ink)]">Solution:</span> {project.solution}
-                  </p>
-
-
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-[rgba(255,107,53,0.22)] bg-[rgba(255,107,53,0.08)] px-3 py-1 text-xs font-bold text-[var(--orange)]"
-                      >
-                        {tech}
+                  {/* ── Tech Stack Section ── */}
+                  <div className="mt-5 border-t border-[rgba(45,45,45,0.06)] pt-4">
+                    <div className="mb-3 flex items-center gap-2">
+                      <span className="rounded-md bg-[rgba(255,107,53,0.1)] px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-[0.2em] text-[var(--orange)]">
+                        Tech Stack
                       </span>
-                    ))}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {project.stack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="inline-flex items-center rounded-full border border-[rgba(45,45,45,0.1)] bg-[#fafafa] px-3 py-1 text-xs font-bold text-[var(--ink)] transition-all hover:border-[var(--orange)] hover:bg-[rgba(255,107,53,0.08)] hover:text-[var(--orange)] hover:shadow-sm"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
