@@ -116,14 +116,7 @@ export default function ProjectsSection() {
                     <span className="font-bold text-[var(--ink)]">Solution:</span> {project.solution}
                   </p>
 
-                  <div className="mt-5 rounded-2xl border border-[rgba(45,45,45,0.08)] bg-[var(--cream)] p-4">
-                    <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[rgba(45,45,45,0.55)]">
-                      Key Feature
-                    </div>
-                    <div className="mt-1.5 text-xs font-semibold leading-6 text-[var(--ink)]">
-                      {project.feature}
-                    </div>
-                  </div>
+
 
                   <div className="mt-5 flex flex-wrap gap-2">
                     {project.stack.map((tech) => (

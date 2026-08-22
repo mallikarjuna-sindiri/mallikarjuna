@@ -73,7 +73,7 @@ export const projects = [
     problem: 'Teams needed a smarter way to build, personalize and distribute invitations at scale.',
     solution: 'Built a full-stack platform with image-processing features, optimized APIs and cloud deployment support.',
     feature: 'AI-assisted invitation workflows with scalable backend handling.',
-    stack: ['Next.js', 'FastAPI', 'Python', 'Docker', 'AWS', 'GCP'],
+    stack: ['Next.js', 'FastAPI', 'Python', 'Docker', 'AWS', 'GCP','postgreSQL','CosmosDB','Redis'],
     github: 'https://github.com/mallikarjuna-sindiri',
     liveUrl: 'https://1vite.ai/',
     demoLabel: 'Open Case Study',

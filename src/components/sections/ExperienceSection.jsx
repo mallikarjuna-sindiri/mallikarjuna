@@ -17,7 +17,7 @@ export default function ExperienceSection() {
                 <div>
                   <div className="flex flex-col gap-4">
                     <div>
-                      <div className="inline-flex h-4 w-4 -translate-x-[34px] rounded-full border-4 border-white bg-[var(--orange)] shadow-[0_0_0_6px_rgba(255,107,53,0.1)]" />
+                      <div className="inline-flex h-5 w-5 -translate-x-[24px] rounded-full border-4 border-white bg-[var(--orange)] shadow-[0_0_0_6px_rgba(255,107,53,0.1)]" />
                       <h3 className="text-2xl font-bold text-[var(--ink)]">{item.role}</h3>
                       {item.href ? (
                         <a href={item.href} target="_blank" rel="noreferrer" className="mt-1 inline-flex text-lg font-medium text-[var(--orange)] transition-colors hover:text-[var(--orange-deep)]">
