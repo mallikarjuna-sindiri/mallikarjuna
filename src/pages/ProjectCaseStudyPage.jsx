@@ -59,6 +59,16 @@ export default function ProjectCaseStudyPage() {
                 Live App ↗
               </a>
             )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-[var(--orange)] px-3 py-1 text-xs font-bold text-[var(--orange)] transition-colors hover:bg-[var(--orange)] hover:text-white"
+              >
+                GitHub ↗
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -87,22 +97,28 @@ export default function ProjectCaseStudyPage() {
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-[var(--orange)] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[var(--orange-deep)] hover:scale-105 shadow-md"
-                >
-                  <span>View GitHub Code</span>
-                  <span>↗</span>
-                </a>
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-[var(--orange)] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[var(--orange-deep)] hover:scale-105 shadow-md"
+                  >
+                    <span>View GitHub Code</span>
+                    <span>↗</span>
+                  </a>
+                )}
 
                 {project.liveUrl && (
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.08)] px-6 py-3 text-sm font-bold text-white transition-all hover:border-[var(--orange)] hover:text-[var(--orange)]"
+                    className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all shadow-md ${
+                      project.github
+                        ? 'border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.08)] text-white hover:border-[var(--orange)] hover:text-[var(--orange)]'
+                        : 'bg-[var(--orange)] text-white hover:bg-[var(--orange-deep)] hover:scale-105'
+                    }`}
                   >
                     <span>Launch Live Application</span>
                     <span>↗</span>
@@ -474,22 +490,28 @@ export default function ProjectCaseStudyPage() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--orange)] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[var(--orange-deep)] hover:scale-105 shadow-md"
-            >
-              <span>Explore Source Code on GitHub</span>
-              <span>↗</span>
-            </a>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--orange)] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[var(--orange-deep)] hover:scale-105 shadow-md"
+              >
+                <span>Explore Source Code on GitHub</span>
+                <span>↗</span>
+              </a>
+            )}
 
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-[rgba(255,255,255,0.2)] px-6 py-3 text-sm font-bold text-white transition-all hover:border-[var(--orange)] hover:text-[var(--orange)]"
+                className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all shadow-md ${
+                  project.github
+                    ? 'border border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.08)] text-white hover:border-[var(--orange)] hover:text-[var(--orange)]'
+                    : 'bg-[var(--orange)] text-white hover:bg-[var(--orange-deep)] hover:scale-105'
+                }`}
               >
                 <span>Launch Live Application</span>
                 <span>↗</span>

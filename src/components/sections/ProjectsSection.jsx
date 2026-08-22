@@ -32,11 +32,11 @@ export default function ProjectsSection() {
                     {/* Address Bar */}
                     <div className="mx-4 flex flex-1 max-w-xs items-center justify-center rounded-full bg-[rgba(255,255,255,0.08)] px-3 py-1 text-[11px] font-mono text-[rgba(255,255,255,0.5)]">
                       <span className="mr-1.5 text-emerald-400">🔒</span>
-                      https://{project.slug}.ai/
+                      {project.liveUrl ? project.liveUrl : `https://${project.slug}.dev/`}
                     </div>
 
                     <div className="rounded-full bg-[rgba(255,107,53,0.2)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--orange)]">
-                      Live App
+                      {project.liveUrl ? 'Live App' : 'Repository'}
                     </div>
                   </div>
 
@@ -152,14 +152,16 @@ export default function ProjectsSection() {
                       Live Demo ↗
                     </a>
                   )}
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs font-bold text-[rgba(45,45,45,0.7)] hover:text-[var(--orange)]"
-                  >
-                    GitHub ↗
-                  </a>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs font-bold text-[rgba(45,45,45,0.7)] hover:text-[var(--orange)]"
+                    >
+                      GitHub ↗
+                    </a>
+                  )}
                 </div>
               </div>
             </article>
