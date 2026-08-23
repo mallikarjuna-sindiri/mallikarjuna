@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { projects } from '../../data';
+import { getTechLogo } from '../../utils/techLogos';
 import SectionHeading from '../common/SectionHeading';
+import TechLogo from '../common/TechLogo';
 
 export default function ProjectsSection() {
   return (
@@ -117,14 +119,18 @@ export default function ProjectsSection() {
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {project.stack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="inline-flex items-center rounded-full border border-[rgba(45,45,45,0.1)] bg-[#fafafa] px-3 py-1 text-xs font-bold text-[var(--ink)] transition-all hover:border-[var(--orange)] hover:bg-[rgba(255,107,53,0.08)] hover:text-[var(--orange)] hover:shadow-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                      {project.stack.map((tech) => {
+                        const logo = getTechLogo(tech);
+                        return (
+                          <span
+                            key={tech}
+                            className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(45,45,45,0.1)] bg-[#fafafa] px-3 py-1 text-xs font-bold text-[var(--ink)] transition-all hover:border-[var(--orange)] hover:bg-[rgba(255,107,53,0.08)] hover:text-[var(--orange)] hover:shadow-sm"
+                          >
+                            <TechLogo src={logo} alt={tech} className="h-4 w-4 object-contain" />
+                            {tech}
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

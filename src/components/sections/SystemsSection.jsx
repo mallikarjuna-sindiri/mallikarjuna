@@ -1,4 +1,6 @@
+import { getTechLogo } from '../../utils/techLogos';
 import SectionHeading from '../common/SectionHeading';
+import TechLogo from '../common/TechLogo';
 
 const principles = ['Performance', 'Security', 'Scalability', 'Reliability', 'Real Impact'];
 
@@ -20,11 +22,15 @@ export default function SystemsSection() {
             ))}
           </div>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
-            {['React / Next.js', 'FastAPI / Node.js', 'MongoDB / MySQL', 'Docker', 'AWS / GCP', 'GKE'].map((item) => (
-              <div key={item} className="rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-center text-sm text-[rgba(255,255,255,0.82)]">
-                {item}
-              </div>
-            ))}
+            {['React / Next.js', 'FastAPI / Node.js', 'MongoDB / MySQL', 'Docker', 'AWS / GCP', 'GKE'].map((item) => {
+              const logo = getTechLogo(item);
+              return (
+                <div key={item} className="flex items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-center text-sm font-medium text-[rgba(255,255,255,0.82)]">
+                  <TechLogo src={logo} alt={item} className="h-4 w-4 object-contain" />
+                  {item}
+                </div>
+              );
+            })}
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             {principles.map((item) => (

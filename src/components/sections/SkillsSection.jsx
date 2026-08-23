@@ -1,391 +1,301 @@
 import { useState } from 'react';
-import { skillCategories, skills as skillsObject } from '../../data';
+import { getTechLogo, techLogos } from '../../utils/techLogos';
 import SectionHeading from '../common/SectionHeading';
+import TechLogo from '../common/TechLogo';
+
+// Core Stack Tech Logos
+const coreStackItems = [
+  { name: 'Python', logo: techLogos.Python },
+  { name: 'FastAPI', logo: techLogos.FastAPI },
+  { name: 'React', logo: techLogos.React },
+  { name: 'Next.js', logo: techLogos['Next.js'] },
+  { name: 'PostgreSQL', logo: techLogos.PostgreSQL },
+  { name: 'MongoDB', logo: techLogos.MongoDB },
+  { name: 'Docker', logo: techLogos.Docker },
+  { name: 'GCP', logo: techLogos.GCP },
+];
+
+// Engineering Focus Cards
+const focusAreas = [
+  {
+    title: 'Full Stack Development',
+    subtitle: 'Building end-to-end web applications',
+    badgeBg: 'bg-purple-100 text-purple-600',
+    icon: (
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+      </svg>
+    ),
+  },
+  {
+    title: 'AI / Agentic Systems',
+    subtitle: 'Intelligent automation & decision systems',
+    badgeBg: 'bg-sky-100 text-sky-600',
+    icon: (
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Cloud & DevOps',
+    subtitle: 'Scalable deployment & infrastructure',
+    badgeBg: 'bg-emerald-100 text-emerald-600',
+    icon: (
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 001-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Backend Engineering',
+    subtitle: 'APIs, services & system design',
+    badgeBg: 'bg-orange-100 text-orange-600',
+    icon: (
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+      </svg>
+    ),
+  },
+];
+
+// Categorized Skills Data
+const skillCards = [
+  {
+    id: 'programming',
+    filterTag: 'Backend',
+    title: 'PROGRAMMING',
+    icon: '⚡',
+    titleColor: 'text-purple-600',
+    skills: ['Python', 'Java', 'C', 'C++'],
+    usedIn: 'Used in: NEXORA • 1vite • DASH',
+  },
+  {
+    id: 'frontend',
+    filterTag: 'Frontend',
+    title: 'FRONTEND',
+    icon: '🌐',
+    titleColor: 'text-sky-600',
+    skills: ['React.js', 'Next.js', 'JavaScript', 'HTML', 'CSS'],
+    usedIn: 'Used in: AcadLink • DASH • 1vite',
+  },
+  {
+    id: 'backend',
+    filterTag: 'Backend',
+    title: 'BACKEND',
+    icon: '⚙️',
+    titleColor: 'text-emerald-600',
+    skills: ['FastAPI', 'Node.js', 'REST APIs'],
+    usedIn: 'Used in: NEXORA • 1vite',
+  },
+  {
+    id: 'databases',
+    filterTag: 'Backend',
+    title: 'DATABASES',
+    icon: '🗄️',
+    titleColor: 'text-orange-600',
+    skills: ['PostgreSQL', 'MongoDB', 'Redis', 'SQLAlchemy'],
+    usedIn: 'Used in: 1vite • AcadLink • NEXORA',
+  },
+  {
+    id: 'cloud',
+    filterTag: 'Cloud',
+    title: 'CLOUD & DEVOPS',
+    icon: '☁️',
+    titleColor: 'text-cyan-600',
+    skills: ['Docker', 'Kubernetes', 'GCP', 'GKE', 'AWS', 'GitHub Actions'],
+    usedIn: 'Used in: NEXORA • 1vite',
+  },
+  {
+    id: 'tools',
+    filterTag: 'Tools',
+    title: 'DEVELOPER TOOLS',
+    icon: '🛠️',
+    titleColor: 'text-indigo-600',
+    skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'Linux'],
+    usedIn: 'Daily tools for building & shipping',
+  },
+];
+
+const filterTabs = ['All', 'Frontend', 'Backend', 'Cloud', 'Tools'];
 
 export default function SkillsSection() {
-  const [selectedCategoryId, setSelectedCategoryId] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [viewMode, setViewMode] = useState('split'); // 'split' | 'grid'
-  const [activeSkill, setActiveSkill] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('All');
 
-  // Total skill count
-  const totalSkillsCount = skillCategories.reduce((acc, cat) => acc + cat.skills.length, 0);
-
-  // Active Category Data
-  const activeCategory = selectedCategoryId === 'All'
-    ? null
-    : skillCategories.find((cat) => cat.id === selectedCategoryId);
-
-  // Filter skills based on search query
-  const getFilteredSkills = (categorySkills) => {
-    if (!searchQuery.trim()) return categorySkills;
-    return categorySkills.filter((s) => s.toLowerCase().includes(searchQuery.toLowerCase().trim()));
+  // Filter cards based on tab selection
+  const isCardVisible = (filterTag) => {
+    if (activeFilter === 'All') return true;
+    if (activeFilter === 'Frontend' && filterTag === 'Frontend') return true;
+    if (activeFilter === 'Backend' && filterTag === 'Backend') return true;
+    if (activeFilter === 'Cloud' && filterTag === 'Cloud') return true;
+    if (activeFilter === 'Tools' && filterTag === 'Tools') return true;
+    return false;
   };
-
-  // Determine list of categories to show on right panel
-  const categoriesToDisplay = selectedCategoryId === 'All'
-    ? skillCategories
-    : skillCategories.filter((cat) => cat.id === selectedCategoryId);
 
   return (
     <section id="skills" className="px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-
-        {/* ── Header & View Switcher ── */}
+      <div className="mx-auto max-w-7xl space-y-12">
+        {/* ── Top Header & Filter Tabs ── */}
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
-            kicker="Technical Skills"
-            title="Tools to Build the Future"
-            subtitle="A focused stack spanning product development, infrastructure and delivery."
+            kicker="TECHNICAL SKILLS"
+            title="My Engineering Stack"
+            subtitle="A focused stack spanning full-stack development, AI systems, backend engineering and cloud infrastructure."
           />
 
-          {/* View Mode Toggle */}
-          <div className="inline-flex shrink-0 rounded-2xl border border-[rgba(45,45,45,0.08)] bg-white p-1.5 shadow-sm">
-            <button
-              onClick={() => setViewMode('split')}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
-                viewMode === 'split'
-                  ? 'bg-[var(--orange)] text-white shadow-sm'
-                  : 'text-[rgba(45,45,45,0.65)] hover:text-[var(--ink)]'
-              }`}
-              title="Interactive Sidebar & Right Detail Panel"
-            >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-              </svg>
-              Interactive View
-            </button>
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
-                viewMode === 'grid'
-                  ? 'bg-[var(--orange)] text-white shadow-sm'
-                  : 'text-[rgba(45,45,45,0.65)] hover:text-[var(--ink)]'
-              }`}
-              title="Grid View of All Cards"
-            >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-              </svg>
-              Grid View
-            </button>
-          </div>
-        </div>
-
-        {/* ─────────────────────────────────────────────────────────────
-            MODE 1: INTERACTIVE SPLIT VIEW (Left list -> Right side details)
-           ───────────────────────────────────────────────────────────── */}
-        {viewMode === 'split' ? (
-          <div className="mt-10 grid gap-8 lg:grid-cols-12">
-
-            {/* ── LEFT SIDE: Category List & Selector ── */}
-            <div className="lg:col-span-4 xl:col-span-4">
-              <div className="sticky top-24 rounded-[1.75rem] border border-[rgba(45,45,45,0.08)] bg-white p-5 shadow-soft">
-                
-                {/* Left Header */}
-                <div className="mb-4 flex items-center justify-between border-b border-[rgba(45,45,45,0.06)] pb-3 px-2">
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-[rgba(45,45,45,0.5)]">
-                    Skill Categories
-                  </span>
-                  <span className="rounded-full bg-[rgba(255,107,53,0.1)] px-2.5 py-0.5 text-xs font-bold text-[var(--orange)]">
-                    {skillCategories.length} Categories
-                  </span>
-                </div>
-
-                {/* Categories List */}
-                <div className="flex flex-col gap-2">
-                  
-                  {/* All Skills Option */}
-                  <button
-                    onClick={() => {
-                      setSelectedCategoryId('All');
-                      setActiveSkill(null);
-                    }}
-                    className={`group relative flex items-center justify-between rounded-xl px-4 py-3.5 text-left text-sm font-semibold transition-all duration-200 ${
-                      selectedCategoryId === 'All'
-                        ? 'bg-[var(--dark)] text-white shadow-md'
-                        : 'bg-transparent text-[var(--ink)] hover:bg-[rgba(255,107,53,0.06)] hover:text-[var(--orange)]'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-lg">🚀</span>
-                      <span>All Technical Skills</span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`rounded-full px-2.5 py-0.5 text-xs font-bold transition-colors ${
-                          selectedCategoryId === 'All'
-                            ? 'bg-[var(--orange)] text-white'
-                            : 'bg-[rgba(45,45,45,0.06)] text-[rgba(45,45,45,0.7)] group-hover:bg-[rgba(255,107,53,0.15)] group-hover:text-[var(--orange)]'
-                        }`}
-                      >
-                        {totalSkillsCount}
-                      </span>
-                      <svg
-                        className={`h-4 w-4 transition-transform duration-200 ${
-                          selectedCategoryId === 'All'
-                            ? 'translate-x-1 opacity-100 text-[var(--orange)]'
-                            : 'opacity-0 group-hover:translate-x-1 group-hover:opacity-100'
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </div>
-                  </button>
-
-                  {/* Individual Categories */}
-                  {skillCategories.map((cat) => {
-                    const isSelected = selectedCategoryId === cat.id;
-
-                    return (
-                      <button
-                        key={cat.id}
-                        onClick={() => {
-                          setSelectedCategoryId(cat.id);
-                          setActiveSkill(null);
-                        }}
-                        className={`group relative flex items-center justify-between rounded-xl px-4 py-3 text-left text-sm font-semibold transition-all duration-200 ${
-                          isSelected
-                            ? 'border border-[rgba(255,107,53,0.3)] bg-[rgba(255,107,53,0.08)] text-[var(--orange)] shadow-sm'
-                            : 'border border-transparent bg-transparent text-[var(--ink)] hover:border-[rgba(255,107,53,0.15)] hover:bg-[rgba(255,107,53,0.04)]'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-lg transition-transform duration-200 group-hover:scale-110">
-                            {cat.icon}
-                          </span>
-                          <span className="font-bold">{cat.name}</span>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`rounded-full px-2.5 py-0.5 text-xs font-bold transition-colors ${
-                              isSelected
-                                ? 'bg-[var(--orange)] text-white'
-                                : 'bg-[rgba(45,45,45,0.06)] text-[rgba(45,45,45,0.6)] group-hover:bg-[rgba(255,107,53,0.12)] group-hover:text-[var(--orange)]'
-                            }`}
-                          >
-                            {cat.skills.length}
-                          </span>
-
-                          {/* Animated Right Arrow */}
-                          <svg
-                            className={`h-4 w-4 transition-all duration-200 ${
-                              isSelected
-                                ? 'translate-x-1 opacity-100 text-[var(--orange)]'
-                                : '-translate-x-1 opacity-0 group-hover:translate-x-1 group-hover:opacity-100 group-hover:text-[var(--orange)]'
-                            }`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                          </svg>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* Helper info tip */}
-                <div className="mt-6 rounded-xl border border-[rgba(255,107,53,0.15)] bg-[var(--cream)] p-3.5 text-xs leading-5 text-[rgba(45,45,45,0.7)]">
-                  💡 <span className="font-semibold text-[var(--ink)]">Tip:</span> Click any category on the left to inspect detailed skills on the right side.
-                </div>
-              </div>
-            </div>
-
-
-            {/* ── RIGHT SIDE: Skills Detail Panel (Fades in on click) ── */}
-            <div className="lg:col-span-8 xl:col-span-8">
-              
-              {/* Dynamic wrapper with key to trigger CSS fade-in-right animation on category change */}
-              <div
-                key={selectedCategoryId}
-                className="animate-fade-in-right rounded-[1.75rem] border border-[rgba(45,45,45,0.08)] bg-white p-7 shadow-soft"
-              >
-
-                {/* Right Panel Header & Live Filter */}
-                <div className="flex flex-col gap-4 border-b border-[rgba(45,45,45,0.08)] pb-6 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <div className="flex items-center gap-2.5">
-                      <span className="text-2xl">{activeCategory ? activeCategory.icon : '🚀'}</span>
-                      <h3 className="text-2xl font-black tracking-[-0.02em] text-[var(--ink)]">
-                        {activeCategory ? activeCategory.name : 'All Technical Stack'}
-                      </h3>
-                      <span className="rounded-full bg-[rgba(255,107,53,0.1)] px-3 py-1 text-xs font-bold text-[var(--orange)]">
-                        {activeCategory ? `${activeCategory.skills.length} skills` : `${totalSkillsCount} total skills`}
-                      </span>
-                    </div>
-
-                    <p className="mt-2 text-sm leading-6 text-[rgba(45,45,45,0.75)]">
-                      {activeCategory
-                        ? activeCategory.description
-                        : 'Explore all engineering languages, frameworks, cloud tooling, and developer instruments.'}
-                    </p>
-                  </div>
-
-                  {/* Live Search Input */}
-                  <div className="relative min-w-[200px] shrink-0">
-                    <input
-                      type="text"
-                      placeholder="Search skill..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full rounded-full border border-[rgba(45,45,45,0.12)] bg-[var(--cream)] py-2 pl-9 pr-4 text-xs font-medium text-[var(--ink)] outline-none transition-all placeholder:text-[rgba(45,45,45,0.45)] focus:border-[var(--orange)] focus:ring-2 focus:ring-[rgba(255,107,53,0.15)]"
-                    />
-                    <svg
-                      className="absolute left-3 top-2.5 h-4 w-4 text-[rgba(45,45,45,0.4)]"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Right Panel Content */}
-                <div className="mt-6 space-y-8">
-                  {categoriesToDisplay.map((cat) => {
-                    const filtered = getFilteredSkills(cat.skills);
-                    if (filtered.length === 0 && searchQuery) return null;
-
-                    return (
-                      <div key={cat.id} className="rounded-2xl border border-[rgba(45,45,45,0.05)] bg-[#fafafa] p-5">
-                        
-                        {/* Category Label (Visible when 'All' is selected or for clarity) */}
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center gap-2">
-                            <span className="text-lg">{cat.icon}</span>
-                            <h4 className="text-base font-bold text-[var(--ink)]">{cat.name}</h4>
-                          </div>
-                          <span className="text-xs font-medium text-[rgba(45,45,45,0.5)]">
-                            {filtered.length} {filtered.length === 1 ? 'tool' : 'tools'}
-                          </span>
-                        </div>
-
-                        {/* Skills Chips Grid */}
-                        <div className="flex flex-wrap gap-2.5">
-                          {filtered.map((skill) => {
-                            const isClicked = activeSkill === skill;
-
-                            return (
-                              <button
-                                key={skill}
-                                onClick={() => setActiveSkill(isClicked ? null : skill)}
-                                className={`group relative flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold transition-all duration-200 ${
-                                  isClicked
-                                    ? 'border-[var(--orange)] bg-[var(--orange)] text-white shadow-md scale-105'
-                                    : 'border-[rgba(255,107,53,0.22)] bg-white text-[var(--ink)] hover:-translate-y-0.5 hover:border-[var(--orange)] hover:bg-[rgba(255,107,53,0.08)] hover:text-[var(--orange)] hover:shadow-sm'
-                                }`}
-                              >
-                                <span className="h-1.5 w-1.5 rounded-full bg-[var(--orange)] group-hover:scale-125 transition-transform" />
-                                <span>{skill}</span>
-                                
-                                {/* Small right arrow inside chip on hover */}
-                                <svg
-                                  className={`h-3 w-3 opacity-0 transition-all group-hover:opacity-100 ${
-                                    isClicked ? 'opacity-100 text-white' : 'text-[var(--orange)]'
-                                  }`}
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
-                                </svg>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    );
-                  })}
-
-                  {/* Empty state when searching */}
-                  {searchQuery && categoriesToDisplay.every((cat) => getFilteredSkills(cat.skills).length === 0) && (
-                    <div className="py-12 text-center text-sm text-[rgba(45,45,45,0.6)]">
-                      No skills found matching &quot;<span className="font-semibold text-[var(--ink)]">{searchQuery}</span>&quot;.
-                    </div>
-                  )}
-
-                  {/* Active Skill Info Highlight (if user clicked a skill pill) */}
-                  {activeSkill && (
-                    <div className="animate-fade-in-right rounded-2xl border border-[rgba(255,107,53,0.25)] bg-[rgba(255,107,53,0.06)] p-4 text-xs">
-                      <div className="flex items-center justify-between">
-                        <div className="font-bold text-[var(--orange-deep)]">
-                          ✨ Focused Skill: <span className="text-[var(--ink)] font-black text-sm">{activeSkill}</span>
-                        </div>
-                        <button
-                          onClick={() => setActiveSkill(null)}
-                          className="text-xs font-semibold text-[rgba(45,45,45,0.5)] hover:text-[var(--ink)]"
-                        >
-                          ✕ Close
-                        </button>
-                      </div>
-                      <p className="mt-1 leading-5 text-[rgba(45,45,45,0.8)]">
-                        Demonstrated proficiency in building production-ready features, clean code workflows, and integrated application architecture with {activeSkill}.
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Bottom Footer Summary */}
-                <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[rgba(45,45,45,0.06)] pt-5 text-xs text-[rgba(45,45,45,0.65)]">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>Continuously adopting modern engineering standards & tools</span>
-                  </div>
-                  <div className="font-semibold text-[var(--orange)]">
-                    {selectedCategoryId === 'All' ? 'Showing all skills' : `Category: ${selectedCategoryId}`}
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        ) : (
-          /* ─────────────────────────────────────────────────────────────
-              MODE 2: CARDS GRID VIEW (Original Card View matching design)
-             ───────────────────────────────────────────────────────────── */
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {Object.entries(skillsObject).map(([category, values]) => {
-              const catMeta = skillCategories.find((c) => c.name === category);
-
+          {/* Filter Pills */}
+          <div className="flex flex-wrap gap-2 rounded-2xl border border-[rgba(45,45,45,0.08)] bg-white p-1.5 shadow-sm shrink-0">
+            {filterTabs.map((tab) => {
+              const isActive = activeFilter === tab;
               return (
-                <div
-                  key={category}
-                  className="group rounded-[1.75rem] border border-[rgba(45,45,45,0.08)] bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:border-[rgba(255,107,53,0.3)] hover:shadow-md"
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => setActiveFilter(tab)}
+                  className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
+                    isActive
+                      ? 'bg-[var(--orange)] text-white shadow-sm'
+                      : 'text-[rgba(45,45,45,0.65)] hover:bg-[rgba(255,107,53,0.06)] hover:text-[var(--ink)]'
+                  }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      {catMeta && <span className="text-xl">{catMeta.icon}</span>}
-                      <h3 className="text-xl font-bold text-[var(--ink)]">{category}</h3>
-                    </div>
-                    <span className="rounded-full bg-[rgba(255,107,53,0.1)] px-2.5 py-0.5 text-xs font-bold text-[var(--orange)]">
-                      {values.length}
-                    </span>
-                  </div>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {values.map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-[rgba(255,107,53,0.18)] bg-[rgba(255,107,53,0.07)] px-3 py-1.5 text-xs font-semibold text-[var(--orange)] transition-all hover:bg-[rgba(255,107,53,0.15)] hover:scale-105"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                  {tab}
+                </button>
               );
             })}
           </div>
-        )}
+        </div>
+
+        {/* ── 1. CORE STACK HERO BOX ── */}
+        <div className="rounded-[2.25rem] border border-[rgba(45,45,45,0.08)] bg-gradient-to-b from-white via-[rgba(255,244,237,0.4)] to-white p-6 sm:p-8 shadow-soft">
+          <div className="mb-6 flex items-center gap-2">
+            <span className="rounded-md bg-[rgba(255,107,53,0.1)] px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.2em] text-[var(--orange)]">
+              ⭐ Core Stack
+            </span>
+          </div>
+
+          {/* Stack Items Row */}
+          <div className="flex flex-wrap items-center justify-between gap-4 py-2 sm:gap-6 lg:justify-around">
+            {coreStackItems.map((item, idx) => (
+              <div key={item.name} className="flex items-center gap-4 sm:gap-6">
+                <div className="group flex flex-col items-center gap-2 transition-transform duration-300 hover:scale-110">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-md border border-[rgba(45,45,45,0.06)] p-2.5 transition-all group-hover:border-[rgba(255,107,53,0.3)] group-hover:shadow-lg">
+                    <TechLogo src={item.logo} alt={item.name} className="h-8 w-8 object-contain" />
+                  </div>
+                  <span className="text-xs font-bold text-[rgba(45,45,45,0.8)] group-hover:text-[var(--orange)]">
+                    {item.name}
+                  </span>
+                </div>
+
+                {/* Dot Separator */}
+                {idx < coreStackItems.length - 1 && (
+                  <span className="hidden h-1.5 w-1.5 rounded-full bg-[rgba(45,45,45,0.2)] md:inline-block" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── 2. ENGINEERING FOCUS ── */}
+        <div className="space-y-4">
+          <div className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[var(--orange)]">
+            Engineering Focus
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {focusAreas.map((area) => (
+              <div
+                key={area.title}
+                className="group flex items-start gap-4 rounded-2xl border border-[rgba(45,45,45,0.08)] bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(255,107,53,0.3)] hover:shadow-md"
+              >
+                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${area.badgeBg} shadow-sm`}>
+                  {area.icon}
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-[var(--ink)] group-hover:text-[var(--orange)] transition-colors">
+                    {area.title}
+                  </h4>
+                  <p className="mt-1 text-xs leading-5 text-[rgba(45,45,45,0.65)]">
+                    {area.subtitle}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── 3. CATEGORIZED SKILL CARDS GRID (3 cols) ── */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {skillCards.map((card) => {
+            if (!isCardVisible(card.filterTag)) return null;
+
+            return (
+              <div
+                key={card.id}
+                className="group flex flex-col justify-between rounded-[1.75rem] border border-[rgba(45,45,45,0.08)] bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(255,107,53,0.3)] hover:shadow-xl"
+              >
+                <div>
+                  {/* Top Bar */}
+                  <div className="flex items-center justify-between border-b border-[rgba(45,45,45,0.06)] pb-4">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-base">{card.icon}</span>
+                      <h3 className={`text-xs font-extrabold uppercase tracking-[0.16em] ${card.titleColor}`}>
+                        {card.title}
+                      </h3>
+                    </div>
+                    <span className="text-xs font-semibold text-[rgba(45,45,45,0.45)]">
+                      {card.skills.length} skills
+                    </span>
+                  </div>
+
+                  {/* Skills Pills */}
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {card.skills.map((skill) => {
+                      const logo = getTechLogo(skill);
+                      return (
+                        <span
+                          key={skill}
+                          className="inline-flex items-center gap-1.5 rounded-xl border border-[rgba(45,45,45,0.08)] bg-[#f8fafc] px-3.5 py-1.5 text-xs font-bold text-[var(--ink)] transition-all hover:border-[var(--orange)] hover:bg-[rgba(255,107,53,0.08)] hover:text-[var(--orange)] hover:shadow-sm"
+                        >
+                          <TechLogo src={logo} alt={skill} className="h-4 w-4 object-contain" />
+                          {skill}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Footer text */}
+                <div className="mt-6 border-t border-[rgba(45,45,45,0.06)] pt-3 text-[11px] font-semibold text-[rgba(45,45,45,0.5)]">
+                  {card.usedIn}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ── 4. QUOTE CARD BANNER ── */}
+        <div className="relative overflow-hidden rounded-[1.75rem] border border-[rgba(255,107,53,0.2)] bg-gradient-to-br from-[rgba(255,244,237,0.9)] via-white to-[rgba(255,107,53,0.06)] p-7 sm:p-8 shadow-soft flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          {/* Background decorative dots */}
+          <div className="pointer-events-none absolute -right-6 -bottom-6 h-32 w-32 opacity-15">
+            <div className="grid grid-cols-6 gap-2">
+              {Array.from({ length: 36 }).map((_, i) => (
+                <span key={i} className="h-2 w-2 rounded-full bg-[var(--orange)]" />
+              ))}
+            </div>
+          </div>
+
+          <div className="relative z-10 max-w-2xl">
+            <span className="text-4xl font-serif text-[var(--orange)] font-black">“</span>
+            <p className="mt-1 text-base sm:text-lg font-bold leading-relaxed text-[var(--ink)]">
+              I love turning ideas into scalable products with the right technology.
+            </p>
+          </div>
+
+          <div className="relative z-10 flex items-center gap-2 shrink-0">
+            <span className="h-2.5 w-2.5 rounded-full bg-[var(--orange)] animate-pulse" />
+            <span className="text-xs sm:text-sm font-bold text-[rgba(45,45,45,0.7)]">Mallikarjuna Sindiri</span>
+          </div>
+        </div>
 
       </div>
     </section>

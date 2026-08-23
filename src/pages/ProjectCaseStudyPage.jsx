@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CaseBlock from '../components/common/CaseBlock';
+import TechLogo from '../components/common/TechLogo';
 import { projects } from '../data';
+import { getTechLogo } from '../utils/techLogos';
 
 export default function ProjectCaseStudyPage() {
   const { slug } = useParams();
@@ -129,14 +131,18 @@ export default function ProjectCaseStudyPage() {
 
             {/* Stack Pills on Right */}
             <div className="flex flex-wrap gap-2 lg:max-w-xs lg:justify-end">
-              {project.stack.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-full border border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.08)] px-3.5 py-1.5 text-xs font-bold text-white/90 shadow-sm"
-                >
-                  {tech}
-                </span>
-              ))}
+              {project.stack.map((tech) => {
+                const logo = getTechLogo(tech);
+                return (
+                  <span
+                    key={tech}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.08)] px-3.5 py-1.5 text-xs font-bold text-white/90 shadow-sm"
+                  >
+                    <TechLogo src={logo} alt={tech} className="h-4 w-4 object-contain" />
+                    {tech}
+                  </span>
+                );
+              })}
             </div>
           </div>
         </div>

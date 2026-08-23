@@ -1,6 +1,8 @@
 import { experience } from '../../data';
 import oneViteLogo from '../../images/1vite_logo.png';
+import { getTechLogo } from '../../utils/techLogos';
 import SectionHeading from '../common/SectionHeading';
+import TechLogo from '../common/TechLogo';
 
 export default function ExperienceSection() {
   return (
@@ -39,11 +41,15 @@ export default function ExperienceSection() {
                       ))}
                     </ul>
                     <div className="mt-5 flex flex-wrap gap-2">
-                      {item.stack.map((tech) => (
-                        <span key={tech} className="rounded-full border border-[rgba(255,107,53,0.22)] bg-[rgba(255,107,53,0.08)] px-3 py-1.5 text-xs font-semibold text-[var(--orange)]">
-                          {tech}
-                        </span>
-                      ))}
+                      {item.stack.map((tech) => {
+                        const logo = getTechLogo(tech);
+                        return (
+                          <span key={tech} className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(255,107,53,0.22)] bg-[rgba(255,107,53,0.08)] px-3 py-1.5 text-xs font-semibold text-[var(--orange)]">
+                            <TechLogo src={logo} alt={tech} className="h-4 w-4 object-contain" />
+                            {tech}
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
