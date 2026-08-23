@@ -67,7 +67,7 @@ const skillCards = [
     title: 'PROGRAMMING',
     icon: '⚡',
     titleColor: 'text-purple-600',
-    skills: ['Python', 'Java', 'C', 'C++'],
+    skills: ['Python', 'Java', 'C'],
     usedIn: 'Used in: NEXORA • 1vite • DASH',
   },
   {
@@ -94,7 +94,7 @@ const skillCards = [
     title: 'DATABASES',
     icon: '🗄️',
     titleColor: 'text-orange-600',
-    skills: ['PostgreSQL', 'MongoDB', 'Redis', 'SQLAlchemy'],
+    skills: ['PostgreSQL', 'MongoDB', 'Redis', 'CosmosDB'],
     usedIn: 'Used in: 1vite • AcadLink • NEXORA',
   },
   {
@@ -112,7 +112,7 @@ const skillCards = [
     title: 'DEVELOPER TOOLS',
     icon: '🛠️',
     titleColor: 'text-indigo-600',
-    skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'Linux'],
+    skills: ['Git', 'GitHub', 'VS Code', 'Antigravity', 'Github CLI', 'Github Copilot', 'Cursor'],
     usedIn: 'Daily tools for building & shipping',
   },
 ];
@@ -152,11 +152,10 @@ export default function SkillsSection() {
                   key={tab}
                   type="button"
                   onClick={() => setActiveFilter(tab)}
-                  className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
-                    isActive
+                  className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${isActive
                       ? 'bg-[var(--orange)] text-white shadow-sm'
                       : 'text-[rgba(45,45,45,0.65)] hover:bg-[rgba(255,107,53,0.06)] hover:text-[var(--ink)]'
-                  }`}
+                    }`}
                 >
                   {tab}
                 </button>
